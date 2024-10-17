@@ -17,7 +17,7 @@ def sample_dataset_BHSig260(path, num_samples, random_seed):
     random_seed: The random seed for reproducibility.
     """
 
-    export_base_dir = "./sample data/BHSig260_Dataset_Bengali/"
+    export_base_dir = "./sample_data/BHSig260_Dataset_Bengali/"
 
     # Get a list of all user directories (e.g., '001', '100', etc.)
     user_dirs = [os.path.join(path, d) for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
@@ -77,7 +77,7 @@ def sample_dataset_BHSig260(path, num_samples, random_seed):
 if __name__=="__main__":
 
     data_path = "./data/BHSig260/Bengali/"
-    num_samples = 5
+    num_samples = 1
     seed = 123
 
     sample_dataset_BHSig260(data_path, num_samples, seed)
