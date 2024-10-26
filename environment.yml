@@ -1,4 +1,4 @@
-name: data1030
+name: Fraud-Signature-Detection
 channels:
 - conda-forge
 - defaults
