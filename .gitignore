@@ -1,1 +1,3 @@
 .DS_Store
+src/data-preprocessing/EfficientNetb0/preprocessed_signature_df.pkl
+src/data-preprocessing/EfficientNetb0/preprocessed_triplets.npy
