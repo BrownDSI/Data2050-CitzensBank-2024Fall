@@ -1,4 +1,17 @@
 .DS_Store
-src/data-preprocessing/EfficientNetb0/preprocessed_signature_df.pkl
-src/data-preprocessing/EfficientNetb0/preprocessed_triplets.npy
-__pycache__/
+# # data-preprocessing/__pycache__
+# src/data-preprocessing/__pycache__
+
+# # data-preprocessing/EfficientNetb0
+# src/data-preprocessing/EfficientNetb0/preprocessed_signature_df.pkl
+# src/data-preprocessing/EfficientNetb0/preprocessed_triplets.npy
+
+# eeficientnetb0
+src/efficientnetb0/__pycache__
+
+# src/data-preprocessing
+# src/data-sampling
+
+src/preprocessing/__pycache__
+
+src/efficientnetb0/test_data_best_params.pt

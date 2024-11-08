@@ -24,7 +24,7 @@ with open(os.path.join(current_dir, 'exp_config.json')) as config_file:
     config = json.load(config_file)
 
 # Load preprocessed triplets
-triplets_path = os.path.abspath("../data-preprocessing/EfficientNetb0/preprocessed_triplets.npy")
+triplets_path = os.path.abspath("../preprocessing/preprocess_dataset/preprocessed/EfficientNet/preprocessed_triplets.npy")
 # triplets_path = os.path.abspath(os.path.join(current_dir, '../data-preprocessing', '/EfficientNetb0', 'preprocessed_triplets.npy'))
 triplets = np.load(triplets_path, allow_pickle=True)
 
