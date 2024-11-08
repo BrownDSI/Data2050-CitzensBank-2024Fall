@@ -24,7 +24,7 @@ with open(os.path.join(current_dir, 'exp_config.json')) as config_file:
     config = json.load(config_file)
 
 # Load preprocessed triplets
-triplets_path = os.path.abspath("../preprocessing/preprocess_dataset/preprocessed/EfficientNet/preprocessed_triplets.npy")
+triplets_path = os.path.abspath("../preprocessing/preprocessed_dataset/preprocessed/EfficientNet/preprocessed_triplets.npy")
 # triplets_path = os.path.abspath(os.path.join(current_dir, '../data-preprocessing', '/EfficientNetb0', 'preprocessed_triplets.npy'))
 triplets = np.load(triplets_path, allow_pickle=True)
 
@@ -178,7 +178,7 @@ def objective(trial):
 # Create and optimize study
 study = optuna.create_study(sampler=optuna.samplers.GPSampler(), direction='minimize')
 print('Start training to find best hyperparameters')
-study.optimize(objective, n_trials=25)
+study.optimize(objective, n_trials=10)
 #study.optimize(objective, n_trials=1) # testing
 
 # Print best hyperparameters
@@ -249,6 +249,14 @@ for epoch in range(best_params['num_epochs']):
         loss = criterion(anchor_embedding, positive_embedding, negative_embedding)
         loss.backward()
         optimizer.step()
+
+
+# Get the directory part of the path
+directory = os.path.dirname(config['model_save_path'])
+
+# Check if the directory exists
+if not os.path.exists(directory):
+    os.makedirs(directory) # Create the directory (and any intermediate directories if they don't exist)
 
 torch.save(model.state_dict(), config['model_save_path'])
 print("model saved")
