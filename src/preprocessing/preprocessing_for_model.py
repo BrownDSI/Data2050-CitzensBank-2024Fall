@@ -119,7 +119,7 @@ if __name__ == "__main__":
         hyperparams
     )
     # model can be in ['EfficientNet', 'VGG16', 'ResNet']
-    models = ['EfficientNet']
+    models = ['EfficientNet', 'VGG16']
     for model in models:
         model_df = create_preprocessed_signature_df(preprocessed_df, model, preprocessing_output_dir)
         # Generate and save triplets

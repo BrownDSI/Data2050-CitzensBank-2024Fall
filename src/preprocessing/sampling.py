@@ -26,7 +26,6 @@ def run_sampling_methods(methods, params, base_output_dir):
         if method_params:
             print(f"Running {method_name} with parameters: {method_params}")
             method_output_dir = os.path.join(base_output_dir, f"{method_name}_Sampled")
-            print(method_output_dir)
             os.makedirs(method_output_dir, exist_ok=True)
 
             # Filter parameters for each method
