@@ -6,3 +6,7 @@ src/preprocessing/__pycache__
 
 # params - large file ignore
 src/efficientnetb0/test_data_best_params.pt
+src/vgg16/test_data_best_params.pt
+
+src/preprocessing/preprocessed_dataset/preprocessed/EfficientNet/
+src/preprocessing/preprocessed_dataset/preprocessed/VGG16/
