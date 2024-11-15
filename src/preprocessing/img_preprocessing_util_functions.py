@@ -168,6 +168,21 @@ def preprocess_for_resnet(image):
     standardized_image = (final_image - mean) / std
     return standardized_image
 
+def preprocess_for_inception_v3(image):
+    # Convert numpy array to PIL Image
+    if isinstance(image, np.ndarray):
+        image = Image.fromarray(image)
+        
+    preprocess = transforms.Compose([
+        transforms.Resize((299, 299)),          # Resize to 299x299 pixels
+        transforms.ToTensor(),                  # Convert the image to a PyTorch tensor
+        transforms.Normalize(                   # Normalize with mean and std for Inception V3
+            mean=[0.485, 0.456, 0.406], 
+            std=[0.229, 0.224, 0.225]
+        ),
+    ])
+    return preprocess(image)
+
 
 def split_data(df, train_size, val_size, test_size, random_state):
     """
