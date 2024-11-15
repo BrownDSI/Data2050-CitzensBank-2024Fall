@@ -63,8 +63,8 @@ def run_sampling_methods(methods, params, base_output_dir):
                     if file.endswith(('.jpeg', '.jpg', '.png')):
                         # Extract seed and person information from folder structure
                         path_parts = root.split(os.sep)
-                        seed_folder = path_parts[-2]  # Assume seed folder is one level above person folder
-                        person_folder = path_parts[-1]  # Person ID/Name
+                        seed_folder = path_parts[-3]  # Assume seed folder is one level above person folder
+                        person_folder = path_parts[-2]  # Person ID/Name
 
                         # Determine label based on folder name
                         label = 'TRUE' if 'true' in root.lower() else 'FORGED'

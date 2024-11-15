@@ -1,5 +1,6 @@
-batch_size: 32
-learning_rate: 0.016659686347216644
-num_epochs: 25
-optimizer: Adam
-weight_decay: 0.04268323200612614
+batch_size: 64
+learning_rate: 0.03342748044636077
+momentum: 0.7067201087356318
+num_epochs: 26
+optimizer: SGD
+weight_decay: 0.015805802897028362

@@ -12,7 +12,7 @@ history_df = pd.read_csv(history_path)
 # Iterate through each row and log as a separate run
 for _, row in history_df.iterrows():
     # Initialize wandb for each row
-    wandb.init(project='project_1_exp_1_241108', reinit=True)
+    wandb.init(project='project_1_exp_1_241114', reinit=True)
     
     # Prepare the configuration
     config = {

@@ -61,7 +61,7 @@ if __name__ == "__main__":
         'CEDAR': {
             'data_path': f"{base_data_path}/Cedar",
             'destination_path': f"{sampling_output_dir}/Cedar_Sampled",
-            'num_individuals': 5,
+            'num_individuals': 10,
             'seeds': [123],
             'number_of_signatures': 5,
             'language': 'English'
@@ -69,7 +69,7 @@ if __name__ == "__main__":
         'Signature_Verification': {
             'data_path': f"{base_data_path}/Signature_Verification_Dataset",
             'destination_path': f"{sampling_output_dir}/Signature_Verification_Sampled",
-            'num_individuals': 5,
+            'num_individuals': 10,
             'seed': 123,
             'number_of_signatures': 5,
             'language': 'English'
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         'BHSig260_Hindi': {
             'data_path': f"{base_data_path}/BHSig260/Hindi",
             'destination_path': f"{sampling_output_dir}/BHSig260_Hindi_Sampled",
-            'num_individuals': 8,
+            'num_individuals': 10,
             'seed': 404,
             'number_of_signatures': 5,
             'language': 'Hindi'
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         'Real_Fake_Data': {
             'data_path': f"{base_data_path}/Real_Fake_Signature/Signature Images",
             'destination_path': f"{sampling_output_dir}/Real_Fake_Signature_Sampled",
-            'num_individuals': 3,
+            'num_individuals': 9,
             'seed': 707,
             'number_of_signatures': 5,
             'language': 'Turkish'
@@ -101,7 +101,7 @@ if __name__ == "__main__":
         'Hansig': {
             'data_path': f"{base_data_path}/Hansig",
             'destination_path': f"{sampling_output_dir}/Hansig_Sampled",
-            'num_individuals': 5,
+            'num_individuals': 10,
             'seed': 555,
             'number_of_signatures': 5,
             'language': 'Chinese'

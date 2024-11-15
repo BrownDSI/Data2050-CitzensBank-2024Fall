@@ -65,8 +65,8 @@ def sample_dataset_cedar(data_path, destination_path, num_individuals, seeds, nu
 
 # Example usage
 if __name__=="__main__":
-    data_path = '/Users/hongmingfu/Desktop/Brown University/DATA2050/Cedar'
-    destination_path = '/Users/hongmingfu/Desktop/Brown University/DATA2050/Cedar_Sampled'
+    data_path = './data/Cedar'
+    destination_path = './preprocessed_dataset/sampled/CEDAR_Sampled'
     num_individuals = 5
     seeds = [123, 456, 789]
     number_of_signatures = 5

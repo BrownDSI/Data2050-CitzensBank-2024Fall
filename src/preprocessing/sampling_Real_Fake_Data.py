@@ -28,7 +28,7 @@ def sample_dataset_real_fake(data_path, destination_path, num_individuals, seed,
 
     # Collect all individual identifiers (e.g., '01', '02', etc.) based on filenames
     all_files = [f for f in os.listdir(data_path) if f.endswith(".jpeg")]
-    print(f"Found files: {all_files}")  # Debug: list all files found
+    # print(f"Found files: {all_files}")  # Debug: list all files found
     individuals = sorted(set(f[:2] for f in all_files if len(f) > 3))
     print(f"Identified individuals: {individuals}")  # Debug: show identified individuals
 
@@ -77,8 +77,8 @@ def sample_dataset_real_fake(data_path, destination_path, num_individuals, seed,
 
 # Example usage
 if __name__ == "__main__":
-    data_path = '/Users/hongmingfu/Desktop/Brown University/DATA2050/Real_Fake_Dataset'
-    destination_path = './sample_data/RealFake_Sampled'
+    data_path = './data/Real_Fake_Dataset'
+    destination_path = './preprocessed_dataset/sampled/Real_Fake_Sampled'
     num_individuals = 5
     seed = 123
     number_of_signatures = 5

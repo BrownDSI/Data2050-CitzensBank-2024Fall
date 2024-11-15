@@ -74,8 +74,8 @@ def sample_dataset_hansig(data_path, destination_path, num_individuals, seed, nu
 
 # Example usage
 if __name__ == "__main__":
-    data_path = '/Users/suchen/Desktop/Data2050/sampling/hansig_copy'
-    dest_path = '/Users/suchen/Desktop/Data2050/sampling/hansig_sampled'
+    data_path = './data/Hansig'
+    dest_path = './preprocessed_dataset/sampled/Hansig_Sampled'
     num_individuals = 2
     seed = 156
     num_signatures = 5

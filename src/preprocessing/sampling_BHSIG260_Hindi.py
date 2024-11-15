@@ -77,7 +77,7 @@ def sample_dataset_bhsig260_hindi(data_path, destination_path, num_individuals, 
 # Example usage
 if __name__ == "__main__":
     data_path = "./data/BHSig260/Hindi/"
-    dest_path = "./sample_data/BHSig260_Dataset_Hindi/"
+    dest_path = "./preprocessed_dataset/sampled/BHSig260_Dataset_Hindi/"
     num_individuals = 2
     seed = 123
     number_of_signatures = 5

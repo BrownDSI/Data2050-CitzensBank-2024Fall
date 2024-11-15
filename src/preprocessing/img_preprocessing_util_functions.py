@@ -191,7 +191,7 @@ def create_triplets(df, num_triplets):
     for _ in range(num_triplets):
         # Select anchor and positive from the same person (genuine signatures)
         positive_person_id = random.choice(person_ids)
-        positives = df[(df['person_id'] == positive_person_id) & (df['label'] == 0)]  # assuming '0' is genuine
+        positives = df[(df['person_id'] == positive_person_id) & (df['label'] == 1)]  # assuming '1' is genuine
 
         if len(positives) < 2:
             continue  # Skip if not enough genuine samples
@@ -207,7 +207,7 @@ def create_triplets(df, num_triplets):
             negatives = df[df['person_id'] == negative_person_id]
         else:
             # Negative as forged from the same person
-            negatives = df[(df['person_id'] == positive_person_id) & (df['label'] == 1)]  # assuming '1' is forged
+            negatives = df[(df['person_id'] == positive_person_id) & (df['label'] == 0)]  # assuming '0' is forged
 
         if negatives.empty:
             continue  # Skip if no suitable negative found
@@ -265,7 +265,7 @@ def create_preprocessed_signature_df(preprocessed_df, model_type, preprocessing_
         preprocessed_data.append({
             'person_id': person_id,
             'image': processed_image,  # Save the array directly here
-            'label': 0 if label.lower() == "true" else 1  # Convert 'TRUE'/'FORGED' to 0/1
+            'label': 1 if label.lower() == "true" else 0  # Convert 'TRUE'/'FORGED' to 1/0: true means positive (genuine signature), false means negative(forged siganture)
         })
 
     # Create DataFrame with preprocessed data

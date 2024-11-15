@@ -82,8 +82,8 @@ def sample_signature_verification_dataset(data_path, destination_path, num_indiv
 
 # Example usage
 if __name__ == "__main__":
-    data_path = '/Users/hongmingfu/Desktop/Brown University/DATA2050/Signature_Verification_Dataset'
-    destination_path = '/Users/hongmingfu/Desktop/Brown University/DATA2050/Signature_Verification_Sampled'
+    data_path = './data/Signature_Verification_Dataset'
+    destination_path = './preprocessed_dataset/sampled/Signature_Verification_Sampled'
     num_individuals = 5
     seed = 123
     number_of_signatures = 5
