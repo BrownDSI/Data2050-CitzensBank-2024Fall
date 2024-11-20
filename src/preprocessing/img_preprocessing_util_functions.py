@@ -10,6 +10,8 @@ import imgaug.augmenters as iaa
 import random
 from sklearn.model_selection import train_test_split
 from pathlib import Path
+from torchvision import transforms
+from PIL import Image
 
 
 def decode_image(base64_str, shape):
@@ -251,7 +253,8 @@ def create_preprocessed_signature_df(preprocessed_df, model_type, preprocessing_
     model_preprocess_map = {
         'EfficientNet': preprocess_for_efficientnet,
         'VGG16': preprocess_for_vgg16,
-        'ResNet': preprocess_for_resnet
+        'ResNet': preprocess_for_resnet,
+        'InceptionV3': preprocess_for_inception_v3
     }
 
     # Ensure the model type is supported
