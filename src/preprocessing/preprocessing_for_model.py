@@ -93,7 +93,7 @@ if __name__ == "__main__":
         'Real_Fake_Data': {
             'data_path': f"{base_data_path}/Real_Fake_Signature/Signature Images",
             'destination_path': f"{sampling_output_dir}/Real_Fake_Signature_Sampled",
-            'num_individuals': 9,
+            'num_individuals': 10,
             'seed': 707,
             'number_of_signatures': 5,
             'language': 'Turkish'
@@ -119,7 +119,7 @@ if __name__ == "__main__":
         hyperparams
     )
     # model can be in ['EfficientNet', 'VGG16', 'ResNet','InceptionV3']
-    models = ['EfficientNet', 'VGG16', 'InceptionV3']
+    models = ['EfficientNet', 'VGG16', 'ResNet', 'InceptionV3']
     for model in models:
         model_df = create_preprocessed_signature_df(preprocessed_df, model, preprocessing_output_dir)
         # Generate and save triplets

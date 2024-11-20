@@ -1,0 +1,26 @@
+program: parameter_search.py
+method: bayes  # Can also be 'grid' or 'random'
+metric:
+  name: EER
+  goal: minimize
+parameters:
+  batch_size:
+    values: [16, 32, 64]
+  learning_rate:
+    min: 1e-5
+    max: 1e-1
+    distribution: log_uniform_values
+  optimizer:
+    values: ["Adam", "SGD"]
+  momentum:
+    min: 0.5
+    max: 0.9
+    distribution: uniform
+  weight_decay:
+    min: 1e-5
+    max: 1e-1
+    distribution: log_uniform_values
+  num_epochs:
+    min: 10
+    max: 50
+    distribution: int_uniform

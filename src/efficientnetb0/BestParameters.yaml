@@ -1,0 +1,6 @@
+batch_size: 32
+learning_rate: 0.0068606629209201336
+momentum: 0.6455967906098923
+num_epochs: 50
+optimizer: SGD
+weight_decay: 0.003741341363249332
