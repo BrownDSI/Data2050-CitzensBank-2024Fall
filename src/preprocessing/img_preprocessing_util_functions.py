@@ -185,6 +185,28 @@ def preprocess_for_inception_v3(image):
     ])
     return preprocess(image)
 
+def preprocess_for_xception(image):
+    """
+    Preprocess the image for Xception.
+    """
+    # Resize the image to 299x299 pixels (Xception's input size)
+    resized_image = cv2.resize(image, (299, 299))
+    
+    # Ensure the image has 3 channels; if the image is grayscale, duplicate the single channel
+    if resized_image.ndim == 2 or resized_image.shape[-1] == 1:
+        final_image = np.stack((resized_image,) * 3, axis=-1)
+    else:
+        final_image = resized_image
+    
+    # Normalize pixel values to [0, 1]
+    normalized_image = final_image / 255.0
+    
+    # Apply mean and standard deviation normalization
+    mean = np.array([0.5, 0.5, 0.5])  # Xception typically uses [0.5, 0.5, 0.5]
+    std = np.array([0.5, 0.5, 0.5])   # Standard deviation normalization
+    standardized_image = (normalized_image - mean) / std
+    
+    return standardized_image
 
 def split_data(df, train_size, val_size, test_size, random_state):
     """
@@ -254,7 +276,8 @@ def create_preprocessed_signature_df(preprocessed_df, model_type, preprocessing_
         'EfficientNet': preprocess_for_efficientnet,
         'VGG16': preprocess_for_vgg16,
         'ResNet': preprocess_for_resnet,
-        'InceptionV3': preprocess_for_inception_v3
+        'InceptionV3': preprocess_for_inception_v3,
+        'Xception': preprocess_for_xception
     }
 
     # Ensure the model type is supported

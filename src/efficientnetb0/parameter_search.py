@@ -118,5 +118,5 @@ if __name__ == "__main__":
         sweep_config = yaml.safe_load(file)
 
     # Pass the dictionary to wandb.sweep()
-    sweep_id = wandb.sweep(sweep_config, project="EfficientNetb0")
+    sweep_id = wandb.sweep(sweep_config, project="EfficientNetb0-LargeDataSet")
     wandb.agent(sweep_id, sweep_objective)

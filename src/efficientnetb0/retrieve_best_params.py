@@ -3,8 +3,8 @@ import yaml
 
 # Define the project and sweep details
 entity = "zhaoxiner1129-brown-university"  # Replace with your W&B username or team name
-project_name = "EfficientNetb0" # Replace with your project name
-sweep_id = "wi5w3a8v"  # Replace with your actual sweep ID
+project_name = "EfficientNetb0-LargeDataSet" # Replace with your project name
+sweep_id = "jx1jniht"  # Replace with your actual sweep ID
 
 # Initialize W&B API
 api = wandb.Api()

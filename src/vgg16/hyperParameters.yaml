@@ -1,4 +1,4 @@
-batch_size: 64
+batch_size: 16
 learning_rate: 0.01388190139857895
 num_epochs: 28
 optimizer: Adam

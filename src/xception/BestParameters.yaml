@@ -1,0 +1,6 @@
+batch_size: 16
+learning_rate: 0.00020107892009482177
+momentum: 0.8556873193846878
+num_epochs: 42
+optimizer: Adam
+weight_decay: 0.005888867481305383
