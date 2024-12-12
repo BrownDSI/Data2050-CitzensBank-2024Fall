@@ -217,13 +217,17 @@ def split_data(df, train_size, val_size, test_size, random_state):
     val_df, test_df = train_test_split(temp_df, test_size=test_size / (val_size + test_size), random_state=random_state)
     return train_df, val_df, test_df
 
-def create_triplets(df, num_triplets):
+def create_triplets(df, num_triplets,balance_ratio = 0.5):
     """
     Create triplets with mixed negative sampling.
     :param df: DataFrame with columns 'person_id', 'image', 'label', 'Real or Forged'
     :param num_triplets: Number of triplets to generate
     :return: List of triplets
     """
+
+    # this is the old create triplets 
+    '''
+
     triplets = []
     person_ids = df['person_id'].unique()
     
@@ -255,6 +259,51 @@ def create_triplets(df, num_triplets):
         triplets.append((anchor, positive, negative))
     
     return triplets
+    '''
+    triplets = []
+    person_ids = df['person_id'].unique()
+    forged_signatures = df[df['label'] == 0]
+    genuine_signatures = df[df['label'] == 1]
+
+    log = {'forged_negatives': 0, 'genuine_negatives': 0}
+
+    for _ in range(num_triplets):
+        # Select anchor and positive from genuine samples
+        positive_person_id = random.choice(person_ids)
+        positives = df[(df['person_id'] == positive_person_id) & (df['label'] == 1)]
+
+        if len(positives) < 2:
+            continue  # Skip if not enough genuine samples
+
+        anchor_idx, positive_idx = np.random.choice(len(positives), 2, replace=False)
+        anchor = positives.iloc[anchor_idx]['image']
+        positive = positives.iloc[positive_idx]['image']
+
+        # Determine negative sampling type
+        if random.random() < balance_ratio:
+            # Sample forged negative
+            negatives = df[(df['person_id'] == positive_person_id) & (df['label'] == 0)]
+            if not negatives.empty:
+                negative = negatives.sample(1).iloc[0]['image']
+                log['forged_negatives'] += 1
+            else:
+                continue  # Skip if no forged negatives available
+        else:
+            # Sample genuine negative from another person
+            negative_person_id = random.choice([pid for pid in person_ids if pid != positive_person_id])
+            negatives = df[(df['person_id'] == negative_person_id) & (df['label'] == 1)]
+            if not negatives.empty:
+                negative = negatives.sample(1).iloc[0]['image']
+                log['genuine_negatives'] += 1
+            else:
+                continue  # Skip if no genuine negatives available
+
+        triplets.append((anchor, positive, negative))
+
+    print(f"Forged negatives: {log['forged_negatives']}, Genuine negatives: {log['genuine_negatives']}")
+    return triplets
+
+
 
 def save_triplets(df, file_path, num_triplets=1000):
     """

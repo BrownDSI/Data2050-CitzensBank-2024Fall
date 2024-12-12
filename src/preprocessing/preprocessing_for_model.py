@@ -120,11 +120,12 @@ if __name__ == "__main__":
     )
     # model can be in ['EfficientNet', 'VGG16', 'ResNet','InceptionV3', 'Xception']
     models = ['EfficientNet', 'VGG16', 'ResNet', 'InceptionV3', 'Xception']
+    models = ['EfficientNet', 'Xception']
     for model in models:
         model_df = create_preprocessed_signature_df(preprocessed_df, model, preprocessing_output_dir)
         # Generate and save triplets
         num_triplets = 3000  # Set number of triplets to generate
-        triplets = img_utils.create_triplets(model_df, num_triplets)
+        triplets = img_utils.create_triplets(model_df, num_triplets, balance_ratio = 0.5)
         triplet_save_path = Path(preprocessing_output_dir) / model / "preprocessed_triplets.npy"
         np.save(triplet_save_path, np.array(triplets))
         print(f"Saved triplets for {model} to {triplet_save_path}")

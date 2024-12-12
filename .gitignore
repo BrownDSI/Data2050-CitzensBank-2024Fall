@@ -1,4 +1,6 @@
 .DS_Store
+# ignore data
+data/*
 
 # __pycache__ ignore
 src/preprocessing/__pycache__
