@@ -1,26 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# import pretrainedmodels  # Community package for Xception
-
-# class TripletSignatureEmbeddingModel(nn.Module):
-#     def __init__(self, embedding_size=256, num_classes=2):
-#         super(TripletSignatureEmbeddingModel, self).__init__()
-#         # Load pretrained Xception
-#         self.xception = pretrainedmodels.__dict__['xception'](pretrained='imagenet')
-#         num_ftrs = self.xception.last_linear.in_features
-        
-#         # Replace the final classification layer with a linear embedding layer
-#         self.xception.last_linear = nn.Linear(num_ftrs, embedding_size)
-
-#     def forward(self, anchor, positive, negative):
-#         # Forward pass through Xception for each input
-#         anchor_embedding = self.xception(anchor)
-#         positive_embedding = self.xception(positive)
-#         negative_embedding = self.xception(negative)
-#         return anchor_embedding, positive_embedding, negative_embedding
-
-from timm import create_model
+from timm import create_model # import pretrainedmodels  # Community package for Xception
 
 class TripletSignatureEmbeddingModel(nn.Module):
     def __init__(self, embedding_size=256, num_classes=2):

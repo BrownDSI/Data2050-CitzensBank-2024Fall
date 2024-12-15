@@ -1,4 +1,3 @@
-# sampling.py
 import os
 import pandas as pd
 from pathlib import Path
@@ -34,7 +33,7 @@ def run_sampling_methods(methods, params, base_output_dir):
                     'data_path': method_params['data_path'],
                     'destination_path': method_output_dir,
                     'num_individuals': method_params['num_individuals'],
-                    'seeds': method_params['seeds'],
+                    'seed': method_params['seed'],  # Use the first seed in the list
                     'number_of_signatures': method_params['number_of_signatures']
                 }
             elif method_name == 'Signature_Verification':
@@ -54,6 +53,10 @@ def run_sampling_methods(methods, params, base_output_dir):
                     'number_of_signatures': method_params['number_of_signatures']
                 }
             
+            # Check if data path exists
+            if not os.path.exists(method_params['data_path']):
+                raise FileNotFoundError(f"Data path does not exist: {method_params['data_path']}")
+
             method(**filtered_params)
             print(f"{method_name} sampling completed.\n")
 
@@ -61,14 +64,12 @@ def run_sampling_methods(methods, params, base_output_dir):
             for root, _, files in os.walk(method_output_dir):
                 for file in files:
                     if file.endswith(('.jpeg', '.jpg', '.png')):
-                        # Extract seed and person information from folder structure
                         path_parts = root.split(os.sep)
                         seed_folder = path_parts[-3]  # Assume seed folder is one level above person folder
-                        person_folder = path_parts[-2]  # Person ID/Name
+                        person_folder = path_parts[-2]
 
-                        # Determine label based on folder name
                         label = 'TRUE' if 'true' in root.lower() else 'FORGED'
-                        image_id = os.path.splitext(file)[0].split('_')[-1]  # Assume last part of filename is ID
+                        image_id = os.path.splitext(file)[0].split('_')[-1]
 
                         all_sampling_data.append({
                             "Data Source": method_name,
@@ -80,7 +81,6 @@ def run_sampling_methods(methods, params, base_output_dir):
                             "Image File": os.path.join(root, file)
                         })
 
-    # Save sampling information to a DataFrame
     sampling_df = pd.DataFrame(all_sampling_data)
     sampling_csv_path = Path(base_output_dir) / 'sampling_info.csv'
     sampling_df.to_csv(sampling_csv_path, index=False)
@@ -89,8 +89,61 @@ def run_sampling_methods(methods, params, base_output_dir):
     return sampling_df
 
 
-# Define methods, parameters, and output directory
-methods = [
+if __name__ == "__main__":
+    base_data_path = "../data"
+    base_output_path = "/users/fhongmin/CitizensBank-Fraud-Signature-Detection/src/preprocessing/sampled_data"
+    
+    params = {
+        'CEDAR': {
+            'data_path': f"{base_data_path}/Cedar",
+            'destination_path': f"{base_output_path}/Cedar_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'English'
+        },
+        'Signature_Verification': {
+            'data_path': f"{base_data_path}/Signature_Verification_Dataset",
+            'destination_path': f"{base_output_path}/Signature_Verification_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'English'
+        },
+        'BHSig260_Bengali': {
+            'data_path': f"{base_data_path}/BHSig260/Bengali",
+            'destination_path': f"{base_output_path}/BHSig260_Bengali_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'Bengali'
+        },
+        'BHSig260_Hindi': {
+            'data_path': f"{base_data_path}/BHSig260/Hindi",
+            'destination_path': f"{base_output_path}/BHSig260_Hindi_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'Hindi'
+        },
+        'Real_Fake_Data': {
+            'data_path': f"{base_data_path}/Real_Fake_Signature/Signature Images",
+            'destination_path': f"{base_output_path}/Real_Fake_Signature_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'Turkish'
+        },
+        'Hansig': {
+            'data_path': f"{base_data_path}/Hansig",
+            'destination_path': f"{base_output_path}/Hansig_Sampled",
+            'num_individuals': 10,
+            'seed': 42,
+            'number_of_signatures': 10,
+            'language': 'Chinese'
+        }
+    }
+    methods = [
     (sample_dataset_cedar, 'CEDAR'),
     (sample_signature_verification_dataset, 'Signature_Verification'),
     (sample_dataset_bhsig260_bengali, 'BHSig260_Bengali'), 
@@ -99,63 +152,4 @@ methods = [
     (sample_dataset_hansig, 'Hansig')
 ]
 
-
-
-
-
-if __name__ == "__main__":
-    base_data_path = "../../data"
-    base_output_path = "../preprocessing/sampled_data"
-    params = {
-        'CEDAR': {
-            'data_path': f"{base_data_path}/Cedar",
-            'destination_path': f"{base_output_path}/Cedar_Sampled",
-            'num_individuals': 5,
-            'seeds': [123],
-            'number_of_signatures': 5,
-            'language': 'English'
-        },
-        'Signature_Verification': {
-            'data_path': f"{base_data_path}/Signature_Verification_Dataset",
-            'destination_path': f"{base_output_path}/Signature_Verification_Sampled",
-            'num_individuals': 5,
-            'seed': 123,
-            'number_of_signatures': 5,
-            'language': 'English'
-        },
-        'BHSig260_Bengali': {
-            'data_path': f"{base_data_path}/BHSig260/Bengali",
-            'destination_path': f"{base_output_path}/BHSig260_Bengali_Sampled",
-            'num_individuals': 10,
-            'seed': 101,
-            'number_of_signatures': 5,
-            'language': 'Bengali'
-        },
-        'BHSig260_Hindi': {
-            'data_path': f"{base_data_path}/BHSig260/Hindi",
-            'destination_path': f"{base_output_path}/BHSig260_Hindi_Sampled",
-            'num_individuals': 8,
-            'seed': 404,
-            'number_of_signatures': 5,
-            'language': 'Hindi'
-        },
-        'Real_Fake_Data': {
-            'data_path': f"{base_data_path}/Real_Fake_Signature/Signature Images",
-            'destination_path': f"{base_output_path}/Real_Fake_Signature_Sampled",
-            'num_individuals': 3,
-            'seed': 707,
-            'number_of_signatures': 5,
-            'language': 'Turkish'
-        },
-        'Hansig': {
-            'data_path': f"{base_data_path}/Hansig",
-            'destination_path': f"{base_output_path}/Hansig_Sampled",
-            'num_individuals': 5,
-            'seed': 555,
-            'number_of_signatures': 5,
-            'language': 'Chinese'
-        }
-    }
-    
-    
     sampling_df = run_sampling_methods(methods, params, base_output_path)

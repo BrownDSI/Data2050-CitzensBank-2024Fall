@@ -31,12 +31,20 @@ def sample_dataset_hansig(data_path, destination_path, num_individuals, seed, nu
     # Extract unique individual identifiers based on the second numerical value in the naming pattern
     individuals = sorted(set(f.split('_')[2] for f in genuine_files + forged_files))
 
-    # Check if the requested number of individuals is available
-    if num_individuals > len(individuals):
-        raise ValueError(f"Cannot select {num_individuals} individuals, only {len(individuals)} available with both genuine and forged signatures.")
+    # Filter individuals who have both enough genuine and forged signatures
+    eligible_individuals = []
+    for individual in individuals:
+        genuine_individual_files = [f for f in genuine_files if f.split('_')[2] == individual]
+        forged_individual_files = [f for f in forged_files if f.split('_')[2] == individual]
+        if len(genuine_individual_files) >= number_of_signatures and len(forged_individual_files) >= number_of_signatures:
+            eligible_individuals.append(individual)
 
-    # Select random individuals
-    selected_individuals = random.sample(individuals, num_individuals)
+    # Check if the requested number of individuals is available
+    if num_individuals > len(eligible_individuals):
+        raise ValueError(f"Cannot select {num_individuals} individuals, only {len(eligible_individuals)} are eligible with enough genuine and forged signatures.")
+    
+    # Select random individuals from the eligible ones
+    selected_individuals = random.sample(eligible_individuals, num_individuals)
     
     # Create individual folder structure under the seed folder
     for individual in selected_individuals:
@@ -49,10 +57,10 @@ def sample_dataset_hansig(data_path, destination_path, num_individuals, seed, nu
         
         # Copy corresponding genuine files to the true folder
         genuine_individual_files = [f for f in genuine_files if f.split('_')[2] == individual]
-        selected_genuine_files = random.sample(genuine_individual_files, min(number_of_signatures, len(genuine_individual_files)))
+        selected_genuine_files = random.sample(genuine_individual_files, number_of_signatures)
         
         for i, file in enumerate(selected_genuine_files):
-            new_filename = f"Cedar_person_{individual}_true_{i + 1}.jpg"
+            new_filename = f"Hansig_person_{individual}_true_{i + 1}.jpg"
             shutil.copy(
                 os.path.join(genuine_path, file),
                 os.path.join(true_folder, new_filename)
@@ -60,17 +68,16 @@ def sample_dataset_hansig(data_path, destination_path, num_individuals, seed, nu
 
         # Copy corresponding forged files to the forge folder
         forged_individual_files = [f for f in forged_files if f.split('_')[2] == individual]
-        selected_forged_files = random.sample(forged_individual_files, min(number_of_signatures, len(forged_individual_files)))
+        selected_forged_files = random.sample(forged_individual_files, number_of_signatures)
         
         for i, file in enumerate(selected_forged_files):
-            new_filename = f"Cedar_person_{individual}_forge_{i + 1}.jpg"
+            new_filename = f"Hansig_person_{individual}_forge_{i + 1}.jpg"
             shutil.copy(
                 os.path.join(forged_path, file),
                 os.path.join(forge_folder, new_filename)
             )
 
     print(f"Restructuring complete! Data for {num_individuals} individuals with {number_of_signatures} genuine and forged signatures each has been organized in '{seed_folder}'.")
-
 
 # Example usage
 if __name__ == "__main__":

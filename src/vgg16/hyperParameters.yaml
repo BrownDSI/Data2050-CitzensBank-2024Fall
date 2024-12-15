@@ -1,5 +1,0 @@
-batch_size: 16
-learning_rate: 0.01388190139857895
-num_epochs: 28
-optimizer: Adam
-weight_decay: 2.2648681379098252e-05

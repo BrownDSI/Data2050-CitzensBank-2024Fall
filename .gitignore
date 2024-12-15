@@ -3,10 +3,12 @@
 # __pycache__ ignore
 src/preprocessing/__pycache__
 src/efficientnetb0/__pycache__
+src/vgg16/__pycache__
+src/inceptionv3/__pycache__
 src/xception/__pycache__
 
 # params - large file ignore
-src/vgg16/test_data_best_params.pt
+src/vgg16/weights.pth
 
 
 # src/preprocessing/preprocessed_dataset/preprocessed/*
@@ -31,4 +33,6 @@ src/preprocessing/preprocessed_dataset/sampled/Real_Fake_Data_Sampled/*
 src/preprocessing/preprocessed_dataset/sampled/Signature_Verification_Sampled/*
 
 src/efficientnetb0/wandb/*
+src/vgg16/wandb/*
+src/inceptionv3/wandb/*
 src/xception/wandb/*

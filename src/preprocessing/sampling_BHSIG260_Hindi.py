@@ -28,12 +28,26 @@ def sample_dataset_bhsig260_hindi(data_path, destination_path, num_individuals, 
     # Get a list of all user directories in the dataset (e.g., '001', '100', etc.)
     user_dirs = [d for d in os.listdir(data_path) if os.path.isdir(os.path.join(data_path, d))]
     
+    # Filter users with enough genuine and forged signatures
+    eligible_users = []
+    for user_id in user_dirs:
+        user_path = os.path.join(data_path, user_id)
+        image_files = [f for f in os.listdir(user_path) if f.endswith(".tif")]
+
+        # Separate genuine and forged images based on 'G' or 'F' in the filename
+        genuine_images = [img for img in image_files if '-G-' in img]
+        forged_images = [img for img in image_files if '-F-' in img]
+        
+        # Check if the user has enough genuine and forged signatures
+        if len(genuine_images) >= number_of_signatures and len(forged_images) >= number_of_signatures:
+            eligible_users.append(user_id)
+
     # Check if the requested number of individuals is available
-    if num_individuals > len(user_dirs):
-        raise ValueError(f"Cannot select {num_individuals} individuals, only {len(user_dirs)} available.")
-    
-    # Select random individuals
-    sampled_users = random.sample(user_dirs, num_individuals)
+    if num_individuals > len(eligible_users):
+        raise ValueError(f"Cannot select {num_individuals} individuals, only {len(eligible_users)} available with sufficient signatures.")
+
+    # Select random individuals from the eligible users
+    sampled_users = random.sample(eligible_users, num_individuals)
     
     # Process each sampled user
     for user_id in sampled_users:
@@ -53,8 +67,8 @@ def sample_dataset_bhsig260_hindi(data_path, destination_path, num_individuals, 
         forged_images = [img for img in image_files if '-F-' in img]
         
         # Select up to number_of_signatures for each category
-        selected_genuine_images = random.sample(genuine_images, min(number_of_signatures, len(genuine_images)))
-        selected_forged_images = random.sample(forged_images, min(number_of_signatures, len(forged_images)))
+        selected_genuine_images = random.sample(genuine_images, number_of_signatures)
+        selected_forged_images = random.sample(forged_images, number_of_signatures)
         
         # Copy genuine images
         for i, img_file in enumerate(selected_genuine_images, 1):

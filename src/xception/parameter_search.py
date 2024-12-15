@@ -7,7 +7,7 @@ import wandb
 import numpy as np
 import pandas as pd
 from torch.optim import Adam, SGD
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GroupShuffleSplit
 from metric import evaluate
 from model import get_embedding_model, TripletLoss
 from load_data import triplets_to_dataloader
@@ -100,14 +100,39 @@ if __name__ == "__main__":
     triplets_path = os.path.abspath("../preprocessing/preprocessed_dataset/preprocessed/Xception/preprocessed_triplets.npy")
     triplets = np.load(triplets_path, allow_pickle=True)
 
-    # Split triplets into train, validation, and test sets
-    train_triplets, temp_triplets = train_test_split(triplets, train_size=fixed_config['train_size'], random_state=fixed_config['random_state'])
-    val_triplets, test_triplets = train_test_split(temp_triplets, test_size=fixed_config['test_size'] / (fixed_config['val_size'] + fixed_config['test_size']), random_state=fixed_config['random_state'])
+    # # Split triplets into train, validation, and test sets
+    # train_triplets, temp_triplets = train_test_split(triplets, train_size=fixed_config['train_size'], random_state=fixed_config['random_state'])
+    # val_triplets, test_triplets = train_test_split(temp_triplets, test_size=fixed_config['test_size'] / (fixed_config['val_size'] + fixed_config['test_size']), random_state=fixed_config['random_state'])
+
+    # global train_loader, val_loader, test_loader
+    # train_loader = triplets_to_dataloader(train_triplets, batch_size=32)
+    # val_loader = triplets_to_dataloader(val_triplets, batch_size=32)
+    # test_loader = triplets_to_dataloader(test_triplets, batch_size=32)
+
+        # Convert to DataFrame for easier manipulation
+    triplet_df = pd.DataFrame(triplets, columns=['group_id', 'anchor', 'positive', 'negative'])
+
+    # Group-based splitting
+    gss = GroupShuffleSplit(n_splits=1, train_size=fixed_config['train_size'], random_state=fixed_config['random_state'])
+    for train_idx, temp_idx in gss.split(triplet_df, groups=triplet_df['group_id']):
+        train_triplets = triplet_df.iloc[train_idx]
+        temp_triplets = triplet_df.iloc[temp_idx]
+
+    # Further split temp_triplets into validation and test
+    gss_temp = GroupShuffleSplit(n_splits=1, test_size=fixed_config['test_size'] / (fixed_config['val_size'] + fixed_config['test_size']), random_state=42)
+    for val_idx, test_idx in gss_temp.split(temp_triplets, groups=temp_triplets['group_id']):
+        val_triplets = temp_triplets.iloc[val_idx]
+        test_triplets = temp_triplets.iloc[test_idx]
+
+    # Convert back to list format if needed
+    train_triplets_list = train_triplets[['anchor', 'positive', 'negative']].values.tolist()
+    val_triplets_list = val_triplets[['anchor', 'positive', 'negative']].values.tolist()
+    test_triplets_list = test_triplets[['anchor', 'positive', 'negative']].values.tolist()
 
     global train_loader, val_loader, test_loader
-    train_loader = triplets_to_dataloader(train_triplets, batch_size=32)
-    val_loader = triplets_to_dataloader(val_triplets, batch_size=32)
-    test_loader = triplets_to_dataloader(test_triplets, batch_size=32)
+    train_loader = triplets_to_dataloader(train_triplets_list, batch_size=32)
+    val_loader = triplets_to_dataloader(val_triplets_list, batch_size=32)
+    test_loader = triplets_to_dataloader(test_triplets_list, batch_size=32)
 
     # Initialize and run W&B Sweep
     def sweep_objective():
@@ -118,5 +143,5 @@ if __name__ == "__main__":
         sweep_config = yaml.safe_load(file)
 
     # Pass the dictionary to wandb.sweep()
-    sweep_id = wandb.sweep(sweep_config, project="Xception-LargeDataSet")
+    sweep_id = wandb.sweep(sweep_config, project="Xception-Finalized-param")
     wandb.agent(sweep_id, sweep_objective)

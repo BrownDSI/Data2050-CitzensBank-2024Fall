@@ -225,41 +225,6 @@ def create_triplets(df, num_triplets,balance_ratio = 0.5):
     :return: List of triplets
     """
 
-    # this is the old create triplets 
-    '''
-
-    triplets = []
-    person_ids = df['person_id'].unique()
-    
-    for _ in range(num_triplets):
-        # Select anchor and positive from the same person (genuine signatures)
-        positive_person_id = random.choice(person_ids)
-        positives = df[(df['person_id'] == positive_person_id) & (df['label'] == 1)]  # assuming '1' is genuine
-
-        if len(positives) < 2:
-            continue  # Skip if not enough genuine samples
-
-        anchor_idx, positive_idx = np.random.choice(len(positives), 2, replace=False)
-        anchor = positives.iloc[anchor_idx]['image']
-        positive = positives.iloc[positive_idx]['image']
-
-        # Mixed negative sampling
-        if random.random() < 0.5:
-            # Negative from a different person
-            negative_person_id = random.choice([pid for pid in person_ids if pid != positive_person_id])
-            negatives = df[df['person_id'] == negative_person_id]
-        else:
-            # Negative as forged from the same person
-            negatives = df[(df['person_id'] == positive_person_id) & (df['label'] == 0)]  # assuming '0' is forged
-
-        if negatives.empty:
-            continue  # Skip if no suitable negative found
-
-        negative = negatives.sample(1).iloc[0]['image']
-        triplets.append((anchor, positive, negative))
-    
-    return triplets
-    '''
     triplets = []
     person_ids = df['person_id'].unique()
     forged_signatures = df[df['label'] == 0]
@@ -298,7 +263,7 @@ def create_triplets(df, num_triplets,balance_ratio = 0.5):
             else:
                 continue  # Skip if no genuine negatives available
 
-        triplets.append((anchor, positive, negative))
+        triplets.append((positive_person_id, anchor, positive, negative))
 
     print(f"Forged negatives: {log['forged_negatives']}, Genuine negatives: {log['genuine_negatives']}")
     return triplets

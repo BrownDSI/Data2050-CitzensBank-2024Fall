@@ -6,7 +6,7 @@ import wandb
 import numpy as np
 import pandas as pd
 from torch.optim import Adam, SGD
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GroupShuffleSplit
 from metric import evaluate
 from model import get_embedding_model, TripletLoss
 from load_data import triplets_to_dataloader
@@ -26,20 +26,44 @@ with open("BestParameters.yaml", "r") as file:
 triplets_path = os.path.abspath("../preprocessing/preprocessed_dataset/preprocessed/EfficientNet/preprocessed_triplets.npy")
 triplets = np.load(triplets_path, allow_pickle=True)
 
-# Split triplets into train, validation, and test sets
-train_triplets, temp_triplets = train_test_split(triplets, train_size=config['train_size'], random_state=config['random_state'])
-val_triplets, test_triplets = train_test_split(temp_triplets, test_size=config['test_size'] / (config['val_size'] + config['test_size']), random_state=config['random_state'])
+# # Split triplets into train, validation, and test sets
+# train_triplets, temp_triplets = train_test_split(triplets, train_size=config['train_size'], random_state=config['random_state'])
+# val_triplets, test_triplets = train_test_split(temp_triplets, test_size=config['test_size'] / (config['val_size'] + config['test_size']), random_state=config['random_state'])
 
-# Recreate DataLoaders with best parameters
-train_loader = triplets_to_dataloader(train_triplets, best_params['batch_size'])
-val_loader = triplets_to_dataloader(val_triplets, best_params['batch_size'])
-test_loader = triplets_to_dataloader(test_triplets, best_params['batch_size'])
+# # Recreate DataLoaders with best parameters
+# train_loader = triplets_to_dataloader(train_triplets, best_params['batch_size'])
+# val_loader = triplets_to_dataloader(val_triplets, best_params['batch_size'])
+# test_loader = triplets_to_dataloader(test_triplets, best_params['batch_size'])
+
+# Convert to DataFrame for easier manipulation
+triplet_df = pd.DataFrame(triplets, columns=['group_id', 'anchor', 'positive', 'negative'])
+
+# Group-based splitting
+gss = GroupShuffleSplit(n_splits=1, train_size=config['train_size'], random_state=config['random_state'])
+for train_idx, temp_idx in gss.split(triplet_df, groups=triplet_df['group_id']):
+    train_triplets = triplet_df.iloc[train_idx]
+    temp_triplets = triplet_df.iloc[temp_idx]
+
+# Further split temp_triplets into validation and test
+gss_temp = GroupShuffleSplit(n_splits=1, test_size=config['test_size'] / (config['val_size'] + config['test_size']), random_state=42)
+for val_idx, test_idx in gss_temp.split(temp_triplets, groups=temp_triplets['group_id']):
+    val_triplets = temp_triplets.iloc[val_idx]
+    test_triplets = temp_triplets.iloc[test_idx]
+
+# Convert back to list format if needed
+train_triplets_list = train_triplets[['anchor', 'positive', 'negative']].values.tolist()
+val_triplets_list = val_triplets[['anchor', 'positive', 'negative']].values.tolist()
+test_triplets_list = test_triplets[['anchor', 'positive', 'negative']].values.tolist()
+
+train_loader = triplets_to_dataloader(train_triplets_list, batch_size=32)
+val_loader = triplets_to_dataloader(val_triplets_list, batch_size=32)
+test_loader = triplets_to_dataloader(test_triplets_list, batch_size=32)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # ———————————————————————————————————————— W&B INITIALIZATION ——————————————————————————————————————————
 
-wandb.init(project="EfficientNet-Train-Val-Test", config={
+wandb.init(project="EfficientNet-Finalized-param-Train-Val-Test", config={
     "random_state": config['random_state'],
     "train_size": config['train_size'],
     "val_size": config['val_size'],
