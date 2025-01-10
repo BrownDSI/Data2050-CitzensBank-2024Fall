@@ -3,8 +3,8 @@ import yaml
 
 # Define the project and sweep details
 entity = "zhaoxiner1129-brown-university"  # Replace with your W&B username or team name
-project_name = "Xception-MiddleDataSet" # Replace with your project name
-sweep_id = "hy3xu7lt"  # Replace with your actual sweep ID
+project_name = "Xception-Finalized-param" # Replace with your project name
+sweep_id = "bv0fmtao"  # Replace with your actual sweep ID
 
 # Initialize W&B API
 api = wandb.Api()

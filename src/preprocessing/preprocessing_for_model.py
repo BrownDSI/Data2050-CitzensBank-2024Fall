@@ -130,6 +130,7 @@ if __name__ == "__main__":
         num_triplets = 6000  # Set number of triplets to generate
         triplets = img_utils.create_triplets(model_df, num_triplets)
         triplet_save_path = Path(preprocessing_output_dir) / model / "preprocessed_triplets.npy"
+        # np.save(triplet_save_path, np.array(triplets))
         np.save(triplet_save_path, np.array(triplets, dtype=object))
         print(f"Saved triplets for {model} to {triplet_save_path}")
 

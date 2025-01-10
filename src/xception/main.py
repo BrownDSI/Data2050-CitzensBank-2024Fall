@@ -63,7 +63,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # ———————————————————————————————————————— W&B INITIALIZATION ——————————————————————————————————————————
 
-wandb.init(project="Xception-Finalized-param-Train-Val-Test", config={
+wandb.init(project="Xception-Basic-Split-Train-Val-Test", config={
     "random_state": config['random_state'],
     "train_size": config['train_size'],
     "val_size": config['val_size'],

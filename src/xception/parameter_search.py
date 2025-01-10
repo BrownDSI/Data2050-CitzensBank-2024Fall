@@ -109,7 +109,7 @@ if __name__ == "__main__":
     # val_loader = triplets_to_dataloader(val_triplets, batch_size=32)
     # test_loader = triplets_to_dataloader(test_triplets, batch_size=32)
 
-        # Convert to DataFrame for easier manipulation
+    # Convert to DataFrame for easier manipulation
     triplet_df = pd.DataFrame(triplets, columns=['group_id', 'anchor', 'positive', 'negative'])
 
     # Group-based splitting
@@ -143,5 +143,5 @@ if __name__ == "__main__":
         sweep_config = yaml.safe_load(file)
 
     # Pass the dictionary to wandb.sweep()
-    sweep_id = wandb.sweep(sweep_config, project="Xception-Finalized-param")
+    sweep_id = wandb.sweep(sweep_config, project="Xception-Basic-Split")
     wandb.agent(sweep_id, sweep_objective)

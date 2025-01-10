@@ -263,6 +263,7 @@ def create_triplets(df, num_triplets,balance_ratio = 0.5):
             else:
                 continue  # Skip if no genuine negatives available
 
+        # triplets.append((anchor, positive, negative))
         triplets.append((positive_person_id, anchor, positive, negative))
 
     print(f"Forged negatives: {log['forged_negatives']}, Genuine negatives: {log['genuine_negatives']}")
