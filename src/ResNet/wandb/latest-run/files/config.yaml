@@ -1,0 +1,54 @@
+_wandb:
+    value:
+        cli_version: 0.18.7
+        m: []
+        python_version: 3.12.8
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+            "3":
+                - 2
+                - 16
+                - 23
+                - 55
+            "4": 3.12.8
+            "5": 0.18.7
+            "6": 4.42.4
+            "8":
+                - 5
+            "12": 0.18.7
+            "13": linux-x86_64
+batch_size:
+    value: 32
+beta:
+    value: 1.5
+learning_rate:
+    value: 0.0002370361316110418
+momentum:
+    value: 0.7586219029412999
+num_epochs:
+    value: 15
+optimizer:
+    value: Adam
+random_state:
+    value: 42
+test_size:
+    value: 0.15
+train_size:
+    value: 0.7
+val_size:
+    value: 0.15
+weight_decay:
+    value: 7.400709613076833e-05

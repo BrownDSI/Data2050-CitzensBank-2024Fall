@@ -1,0 +1,22 @@
+Start training with best hyperparameters obtained from wandb
+Starting epoch 0
+Starting epoch 1
+Starting epoch 2
+Starting epoch 3
+Starting epoch 4
+Starting epoch 5
+Starting epoch 6
+Starting epoch 7
+Starting epoch 8
+Starting epoch 9
+Starting epoch 10
+Starting epoch 11
+Starting epoch 12
+Starting epoch 13
+Starting epoch 14
+Model saved
+EER: 0.0800 at threshold: 5.2198
+F-beta: 0.9197
+KS Statistic: 0.8489 at threshold: 5.4401
+TP: 828, FP: 73, FN: 72, TN: 827
+Results saved to results.csv

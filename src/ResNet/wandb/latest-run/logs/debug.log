@@ -1,0 +1,32 @@
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Configure stats pid to 355468
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Loading settings from /users/syi29/.config/wandb/settings
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Loading settings from /oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/wandb/settings
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'src/ResNet/main.py', 'program_abspath': '/oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/main.py', 'program': '/oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/main.py'}
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_init.py:_log_setup():533] Logging user logs to /oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/wandb/run-20241215_125057-h6s458hl/logs/debug.log
+2024-12-15 12:50:57,846 INFO    MainThread:355468 [wandb_init.py:_log_setup():534] Logging internal logs to /oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/wandb/run-20241215_125057-h6s458hl/logs/debug-internal.log
+2024-12-15 12:50:57,847 INFO    MainThread:355468 [wandb_init.py:init():619] calling init triggers
+2024-12-15 12:50:57,847 INFO    MainThread:355468 [wandb_init.py:init():626] wandb.init called with sweep_config: {}
+config: {'random_state': 42, 'train_size': 0.7, 'val_size': 0.15, 'test_size': 0.15, 'beta': 1.5, 'optimizer': 'Adam', 'batch_size': 32, 'learning_rate': 0.0002370361316110418, 'weight_decay': 7.400709613076833e-05, 'momentum': 0.7586219029412999, 'num_epochs': 15}
+2024-12-15 12:50:57,847 INFO    MainThread:355468 [wandb_init.py:init():669] starting backend
+2024-12-15 12:50:57,847 INFO    MainThread:355468 [wandb_init.py:init():673] sending inform_init request
+2024-12-15 12:50:57,848 INFO    MainThread:355468 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-12-15 12:50:57,848 INFO    MainThread:355468 [wandb_init.py:init():686] backend started and connected
+2024-12-15 12:50:57,850 INFO    MainThread:355468 [wandb_init.py:init():781] updated telemetry
+2024-12-15 12:50:57,867 INFO    MainThread:355468 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-12-15 12:50:58,123 INFO    MainThread:355468 [wandb_init.py:init():867] starting run threads in backend
+2024-12-15 12:50:58,511 INFO    MainThread:355468 [wandb_run.py:_console_start():2456] atexit reg
+2024-12-15 12:50:58,511 INFO    MainThread:355468 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-12-15 12:50:58,511 INFO    MainThread:355468 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-12-15 12:50:58,512 INFO    MainThread:355468 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-12-15 12:50:58,516 INFO    MainThread:355468 [wandb_init.py:init():911] run started, returning control to user process
+2024-12-15 13:02:35,115 INFO    MainThread:355468 [wandb_run.py:_finish():2155] finishing run yi_sun1-brown-university/ResNet-Train-Val-Test/h6s458hl
+2024-12-15 13:02:35,115 INFO    MainThread:355468 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-12-15 13:02:35,116 INFO    MainThread:355468 [wandb_run.py:_restore():2402] restore
+2024-12-15 13:02:35,116 INFO    MainThread:355468 [wandb_run.py:_restore():2408] restore done
+2024-12-15 13:02:36,772 INFO    MainThread:355468 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-12-15 13:02:36,773 INFO    MainThread:355468 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-12-15 13:02:36,781 INFO    MainThread:355468 [wandb_run.py:_footer_sync_info():3921] logging synced files

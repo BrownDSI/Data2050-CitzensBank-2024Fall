@@ -1,0 +1,17 @@
+{"time":"2024-12-15T12:50:57.859004082-05:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-15T12:50:57.859017242-05:00","level":"INFO","msg":"created symlink","path":"/oscar/home/syi29/CitizensBank-Fraud-Signature-Detection/src/ResNet/wandb/run-20241215_125057-h6s458hl/logs/debug-core.log"}
+{"time":"2024-12-15T12:50:57.969994275-05:00","level":"INFO","msg":"created new stream","id":"h6s458hl"}
+{"time":"2024-12-15T12:50:57.970019345-05:00","level":"INFO","msg":"stream: started","id":"h6s458hl"}
+{"time":"2024-12-15T12:50:57.970036365-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"h6s458hl"}
+{"time":"2024-12-15T12:50:57.970083086-05:00","level":"INFO","msg":"handler: started","stream_id":"h6s458hl"}
+{"time":"2024-12-15T12:50:57.970124986-05:00","level":"INFO","msg":"sender: started","stream_id":"h6s458hl"}
+{"time":"2024-12-15T12:50:58.154969151-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-15T13:02:35.116636976-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-15T13:02:35.11741607-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-15T13:02:35.667984124-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-15T13:02:35.770267406-05:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2024-12-15T13:02:36.78396557-05:00","level":"INFO","msg":"stream: closing","id":"h6s458hl"}
+{"time":"2024-12-15T13:02:36.78398389-05:00","level":"INFO","msg":"handler: closed","stream_id":"h6s458hl"}
+{"time":"2024-12-15T13:02:36.78399357-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"h6s458hl"}
+{"time":"2024-12-15T13:02:36.78400206-05:00","level":"INFO","msg":"sender: closed","stream_id":"h6s458hl"}
+{"time":"2024-12-15T13:02:36.785701898-05:00","level":"INFO","msg":"stream: closed","id":"h6s458hl"}
