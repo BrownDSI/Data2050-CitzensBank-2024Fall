@@ -29,22 +29,6 @@ This repository contains an implementation of the EfficientNet-b0 model trained 
 4. [Acknowledgments](#acknowledgments)
 
 
-<!-- ## File Descriptions -->
-<!-- 
-### 1. **FixedParameters.yaml**
-- Contains all fixed hyperparameters for the EfficientNet-b0 model.
-- Includes parameters such as:
-  - `random_state`
-  - `train_size`
-  - `beta`
-  - `num_classes`
-
----
-
-### 2. **load_data.py**
-- Loads triplet data (anchor, positive, negative) for train, validation, and test datasets.
-- Converts triplets into a `DataLoader` format for batch processing. -->
-
 
 ## File Descriptions
 
@@ -187,7 +171,7 @@ This repository contains an implementation of the EfficientNet-b0 model trained 
   ``
 - This will train the model and save evaluation results to `results.csv`.
 
----
+
 
 ## Outputs
 
@@ -195,7 +179,7 @@ This repository contains an implementation of the EfficientNet-b0 model trained 
 2. **`BestParameters.yaml`**: Stores the optimal hyperparameters for training.
 3. **`results.csv`**: Final evaluation metrics from the test dataset.
 
----
+
 
 ## Dependencies
 
@@ -206,22 +190,6 @@ Run the following command to install all required dependencies:
 pip install -r requirements.txt
 ``
 
-<!-- ## Common Use Cases
-
-- Training the EfficientNet-b0 model for tasks involving triplet-based learning.
-- Experimenting with different parameter combinations for optimized performance.
-- Analyzing and comparing evaluation metrics for improved decision-making.
-
-
-## Contributing
-
-We welcome contributions! If you'd like to improve this project, please open a pull request or submit an issue for discussion.
-
-
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details. -->
 
 
 
